@@ -19,6 +19,7 @@ import { PostModule } from 'src/post/post.module';
 
       // TODOS: remove synchronize in production
       synchronize: true,
+      autoLoadEntities: true, // ✅ this loads all entities registered via TypeOrmModule.forFeature()
     }),
     PostModule,
   ],

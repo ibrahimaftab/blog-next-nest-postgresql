@@ -16,5 +16,5 @@ export class Category {
   slug: string;
 
   @ManyToOne(() => Post, (post) => post.categories)
-  post: Post;
+  post: Post[];
 }

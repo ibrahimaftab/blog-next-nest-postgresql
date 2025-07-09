@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Category } from 'src/category/category.entity';
 
 @Entity()
@@ -24,6 +30,7 @@ export class Post {
   @Column()
   slug: string;
 
-  @OneToMany(() => Category, (category) => category.id)
+  @ManyToMany(() => Category, { cascade: true })
+  @JoinTable()
   categories: Category[];
 }
