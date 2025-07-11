@@ -1,5 +1,6 @@
 import {
   IsArray,
+  IsBoolean,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -34,4 +35,9 @@ export class CreatePostDto {
   @IsString()
   @IsOptional()
   categories: string[];
+
+  @IsBoolean()
+  status?: boolean;
 }
+
+export class UpdatePostDto extends CreatePostDto {}

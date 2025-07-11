@@ -7,7 +7,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-export class CategoryDto {
+export class CreateCategoryDto {
   @IsNotEmpty()
   @IsString()
   id: string;
@@ -23,6 +23,8 @@ export class CategoryDto {
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => CategoryDto)
+  @Type(() => CreateCategoryDto)
   slug: string;
 }
+
+export class UpdateCategoryDto extends CreateCategoryDto {}

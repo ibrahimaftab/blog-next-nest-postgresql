@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from 'src/app/app.controller';
 import { AppService } from 'src/app/app.service';
-import { PostModule } from 'src/post/post.module';
+import { PostModule } from 'src/post/module/post.module';
 
 @Module({
   controllers: [AppController],

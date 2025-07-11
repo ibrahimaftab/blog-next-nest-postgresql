@@ -5,7 +5,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { Category } from 'src/category/category.entity';
+import { Category } from 'src/category/entity/category.entity';
 
 @Entity()
 export class Post {
@@ -21,13 +21,13 @@ export class Post {
   @Column()
   summary: string;
 
-  @Column({ default: true })
+  @Column({ default: false })
   status: boolean;
 
   @Column()
   image: string;
 
-  @Column()
+  @Column({ unique: true })
   slug: string;
 
   @ManyToMany(() => Category, { cascade: true })
