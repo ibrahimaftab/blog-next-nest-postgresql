@@ -7,9 +7,9 @@ import {
   Delete,
   Put,
 } from '@nestjs/common';
-import { PostService } from 'src/post/service/post.service';
-import type { CreatePostDto, UpdatePostDto } from 'src/post/dto/post.dto';
-import { Post as IPost } from 'src/post/entity/post.entity';
+import { PostService } from 'src/post/post.service';
+import type { CreatePostDto, UpdatePostDto } from 'src/post/post.dto';
+import { Post as IPost } from 'src/post/post.entity';
 import { type DeleteResult } from 'typeorm';
 
 @Controller('post')

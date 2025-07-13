@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { type Post } from 'src/post/entity/post.entity';
+
 import { type DeleteResult } from 'typeorm';
-import { type UpdatePostDto, type CreatePostDto } from 'src/post/dto/post.dto';
-import { type PostRepository } from 'src/post/repository/post.repository';
-import { type CategoryRepository } from 'src/category/repository/category.repository';
-import { type Category } from 'src/category/entity/category.entity';
+
+import { type Post } from 'src/post/post.entity';
+import { type UpdatePostDto, type CreatePostDto } from 'src/post/post.dto';
+
+import { PostRepository } from 'src/post/post.repository';
+import { PostCategoryEnhancer } from 'src/post/enhancer/post-category.enhance';
 
 @Injectable()
 export class PostService {
   constructor(
     private readonly postRepo: PostRepository,
-    private readonly categoryRepo: CategoryRepository,
+    private readonly postCategoryEnhancer: PostCategoryEnhancer,
   ) {}
 
   async findAll(): Promise<Post[]> {
@@ -23,14 +25,7 @@ export class PostService {
 
   async create(postDto: CreatePostDto): Promise<Post> {
     const status = postDto.status ?? false;
-    let categories: Category[] = [];
-
-    if (postDto.categories) {
-      categories = await this.categoryRepo.findCategoriesByCategoriesId(
-        postDto.categories,
-      );
-    }
-
+    const categories = await this.postCategoryEnhancer.enhance(postDto);
     return this.postRepo.createPost({ ...postDto, categories, status });
   }
 

@@ -1,4 +1,4 @@
-import { Post } from 'src/post/entity/post.entity';
+import { Post } from 'src/post/post.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
@@ -12,9 +12,9 @@ export class Category {
   @Column()
   image: string;
 
-  @Column()
+  @Column({ unique: true })
   slug: string;
 
   @ManyToOne(() => Post, (post) => post.categories)
-  post: Post[];
+  post?: Post[];
 }

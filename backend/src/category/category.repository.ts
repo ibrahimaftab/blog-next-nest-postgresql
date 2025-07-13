@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { In, type Repository, type DeleteResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from 'src/category/entity/category.entity';
-import { UpdateCategoryDto } from '../dto/category.dto';
+import { Category } from 'src/category/category.entity';
+import { UpdateCategoryDto, CreateCategoryDto } from './category.dto';
 
 @Injectable()
 export class CategoryRepository {
@@ -26,9 +26,9 @@ export class CategoryRepository {
     });
   }
 
-  async createCategory(category: Category): Promise<Category> {
-    const post = this.categoryRepo.create(category);
-    return this.categoryRepo.save(post);
+  async createCategory(dto: CreateCategoryDto): Promise<Category> {
+    const category = this.categoryRepo.create(dto);
+    return this.categoryRepo.save(category);
   }
 
   async updatePost(
@@ -40,9 +40,9 @@ export class CategoryRepository {
       relations: ['categories'],
     });
 
-    if (!category) throw new Error(`Post with id ${id} not found`);
+    if (!category) throw new Error(`Category with id ${id} not found`);
     else if (category.slug === categoryDto.slug)
-      throw new Error(`Post with slug ${categoryDto.slug} already exists!`);
+      throw new Error(`Category with slug ${categoryDto.slug} already exists!`);
 
     return this.categoryRepo.save(category);
   }

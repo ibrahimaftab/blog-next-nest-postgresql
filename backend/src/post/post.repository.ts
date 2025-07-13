@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { In, type Repository, type DeleteResult } from 'typeorm';
-import { Post } from 'src/post/entity/post.entity';
+import { Post } from 'src/post/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from 'src/category/entity/category.entity';
-import type { UpdatePostDto } from 'src/post/dto/post.dto';
-import { NewPost } from '../interface/newpost.interface';
+import { Category } from 'src/category/category.entity';
+import type { UpdatePostDto } from 'src/post/post.dto';
+import { NewPost } from './post.interface';
 
 @Injectable()
 export class PostRepository {

@@ -5,7 +5,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { Category } from 'src/category/entity/category.entity';
+import { Category } from 'src/category/category.entity';
 
 @Entity()
 export class Post {
