@@ -4,6 +4,8 @@ import {
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Category } from 'src/category/category.entity';
 
@@ -30,7 +32,13 @@ export class Post {
   @Column({ unique: true })
   slug: string;
 
-  @ManyToMany(() => Category, { cascade: true })
+  @ManyToMany(() => Category, { cascade: ['insert', 'update'] })
   @JoinTable()
   categories: Category[];
+
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
 }

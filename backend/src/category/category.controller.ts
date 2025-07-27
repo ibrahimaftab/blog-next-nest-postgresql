@@ -6,7 +6,7 @@ import { CreateCategoryDto, UpdateCategoryDto } from './category.dto';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Get('all')
+  @Get()
   async getCategories() {
     return this.categoryService.findAll();
   }
@@ -16,7 +16,7 @@ export class CategoryController {
     return this.categoryService.findOne(slug);
   }
 
-  @Post('create')
+  @Post()
   async createCategory(@Body() category: CreateCategoryDto) {
     return this.categoryService.create(category);
   }

@@ -11,7 +11,14 @@ export class CategoryService {
   }
 
   async findOne(slug: string) {
-    return this.categoryrRepo.findBySlug(slug);
+    if (slug.length === 0) {
+      throw new Error('Category Slug cannot be empty');
+    }
+    const category = await this.categoryrRepo.findBySlug(slug);
+    if (!category) {
+      throw new Error(`Category with slug ${slug} not found`);
+    }
+    return category;
   }
 
   async create(category: CreateCategoryDto) {

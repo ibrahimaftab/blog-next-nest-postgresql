@@ -20,7 +20,14 @@ export class PostService {
   }
 
   async findOne(slug: string): Promise<Post | null> {
-    return this.postRepo.findBySlug(slug);
+    if (slug.length === 0) {
+      throw new Error('Post Slug cannot be empty');
+    }
+    const post = await this.postRepo.findBySlug(slug);
+    if (!post) {
+      throw new Error(`Post with slug ${slug} not found`);
+    }
+    return post;
   }
 
   async create(postDto: CreatePostDto): Promise<Post> {

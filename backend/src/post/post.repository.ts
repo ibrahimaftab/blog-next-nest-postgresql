@@ -16,11 +16,16 @@ export class PostRepository {
     private readonly categoryRepo: Repository<Category>,
   ) {}
   async findAll(): Promise<Post[]> {
-    return this.postRepo.find();
+    return this.postRepo.find({
+      relations: ['categories'],
+    });
   }
 
   async findBySlug(slug: string): Promise<Post | null> {
-    return this.postRepo.findOneBy({ slug });
+    return this.postRepo.findOne({
+      relations: ['categories'],
+      where: { slug },
+    });
   }
 
   async findCategoriesByCategoriesId(
